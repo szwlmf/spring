@@ -1,0 +1,30 @@
+spring核心：ioc和aop
+IOC控制反转，降低代码耦合度，代码便于管理。之前创建对象、实现依赖关系，需要程序员手动new对象，不管是在哪个方法、哪个类中，耦合度高。spring将创建对象的控制权交给IOC容器管理，容器启动或者在需要时创建对象。
+spring注入的方式：
+
+  set方法注入：
+    <bean id=""  class = "" scope="singleton">//单例
+        <property name="">value</property>
+    </bean>
+   构造方法注入：
+     <bean id=""  class = "" scope="prototype">//多例
+         <constructor-arg name="name" value="test"></constructor-arg>
+        <constructor-arg name="age" value="18"></constructor-arg>
+    </bean>
+    注解注入：spring启用注解注入，要在配置文件中添加标签 <context:annotion-config/>
+      @autowrite：通过bytype注入
+      @resource：通过byname注入，找不见  再通过bytype
+      
+   使用注解开发，要配置spring扫描的包路径：
+   <context:compeonent-scan base-package-""/>
+   
+   静态代理：通过接口依赖实现。在一个类中依赖一个接口，并在该类中提供set方法，实现接口的注入，在外面调用时，传入接口的实现类，从而完成方法调用。
+   aop动态代理，通过预编译和运行期动态代理实现程序功能的统一维护的一种开发技术。
+   通过proxy代理生成代理类，生成代理类时，传入当前类字节码，被代理对象接口引用，invocationHandler对象；通过invocationHandler的invoke完成程序调用。
+   spring原生配置aop：
+   1、引入aop约束
+   2、<aop:pointcut id = "pointcut"  expression="excuite(*x.x.x.x(..))"/>
+   <aop:advicer advice-ref=""  pointcut-ref=""/>
+   
+   用注解实现aop  要添加<aop:aspect-autoproxy/>
+   
